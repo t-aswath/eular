@@ -27,17 +27,14 @@ int main(){
             {1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48}
     };
     long long ans = 0;
-    
-    for(int i=0;i<20;i++){
-        for(int j=0;j<=16;j++){
-            ans=std::max(ans,(long long)grid[i][j]*grid[i][j+1]*grid[i][j+2]*grid[i][j+3]);
-            ans=std::max(ans,(long long)grid[j][i]*grid[j][i+1]*grid[j][j+2]*grid[j][i+3]);
-        }
-    }
-
     for(int i=0;i<=16;i++){
         for(int j=0;j<=16;j++){
-            ans=std::max(ans,(long long)grid[i][j]*grid[i+1][j+1]*grid[i+2][j+2]*grid[i+3][j+3]);
+            long long r=grid[i][j]*grid[i][j+1]*grid[i][j+2]*grid[i][j+3];
+            long long d=grid[i][j]*grid[i+1][j]*grid[i+1][j]*grid[i+3][j];
+            long long dl=grid[i][j]*grid[i+1][j+1]*grid[i+2][j+2]*grid[i+3][j+3];
+            long long dr=grid[i][j+3]*grid[i+1][j+2]*grid[i+2][j+1]*grid[i+3][j];
+            ans=std::max({ans,r,d,dl,dr});
         }
     }
+    printf("%lld",ans);
 }
